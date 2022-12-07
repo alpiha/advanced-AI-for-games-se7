@@ -10,7 +10,7 @@ public class Apple : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       RandomizeSpawn(); 
+       
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class Apple : MonoBehaviour
     }
 
     //Method for spawning an apple somewhere random within the map area
-    private void RandomizeSpawn(){
+    public void RandomizeSpawn(){
         Bounds bounds = this.mapArea.bounds; //This is where the attribute is set. this.mapArea refers to an object you specified in unity
 
         //Random x and y coordinates for the apple within the bounds

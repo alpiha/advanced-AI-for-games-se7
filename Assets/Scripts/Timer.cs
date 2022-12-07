@@ -36,7 +36,11 @@ public class Timer : MonoBehaviour
 
     public void SetTimer(float time)
     {
-        time = this.timer;
+        this.timer = time;
+    }
+
+    public float getTime() {
+        return this.timer;
     }
 
     public void ResetTimer()
@@ -44,4 +48,13 @@ public class Timer : MonoBehaviour
         timer = 0.0f;
         checkpoint = 0.0f;
     }
+
+    public float getCheckpoint() {
+        return this.checkpoint;
+    }
+
+    public void setCheckpoint(float checkpoint) {
+        this.checkpoint = checkpoint;
+    }
+
 }

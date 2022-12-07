@@ -10,12 +10,14 @@ public class Snake : MonoBehaviour
     public int initialSize = 3;
     private Score scoreScript;
     private Timer timerScript;
+    private Apple appleScript;
 
     // Start is called before the first frame update
     void Start()
     {
         scoreScript = GameObject.Find("ScoreText").GetComponent<Score>();
         timerScript = GameObject.Find("TimerText").GetComponent<Timer>();
+        appleScript = GameObject.Find("Apple").GetComponent<Apple>();
         //Look at the ResetGame method for more info
         ResetGame();
 
@@ -63,6 +65,8 @@ public class Snake : MonoBehaviour
     //Method for adding a segment to the segmet list by instantiating a new prefab from the asset folder.
     private void Grow() 
     {
+        scoreScript.IncreaseScore();
+        timerScript.setCheckpoint(timerScript.getTime());
         Transform segment = Instantiate(this.segmentPrefab); //Instantiate a new segment using prefab from asset folder
         segment.position = segments[segments.Count - 1].position;//Add the segment to the tail of the snake by getting the postion of the last segment in the list
 
@@ -88,6 +92,7 @@ public class Snake : MonoBehaviour
         this.transform.position = Vector3.zero; //reset position back to the middle. 
 
         // reset game attibutes
+        appleScript.RandomizeSpawn();
         scoreScript.ResetScore();
         timerScript.ResetTimer();
     }
