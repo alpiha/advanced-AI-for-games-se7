@@ -8,6 +8,11 @@ public class Snake : MonoBehaviour
     private List<Transform> segments = new List<Transform>(); //List attribte for counting length of snake
     public Transform segmentPrefab;
     public int initialSize = 3;
+    private float timer = 0;
+    [Tooltip("deadtime maximum time between apple pickups")]
+    public float deadtime = 60;
+    private float checkpoint = 0;
+    private int score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +24,14 @@ public class Snake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // time related, increase timer and checks between last pickup and now
+        timer += Time.deltaTime;
+        if(timer - checkpoint > deadtime)
+        {
+            ResetGame();
+        }
+
+
         //Code for changing direction the snake move with WASD
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) {
             if(direction != Vector2.down) {
@@ -37,7 +50,6 @@ public class Snake : MonoBehaviour
                 direction = Vector2.right;
             }
         }
-
     }
 
     //FixedUpdate is a method that is called at a fixed interval, which can be configure in unity. (Edit->Project settings->Time->Fixed Time step = 0.06)
@@ -63,11 +75,20 @@ public class Snake : MonoBehaviour
         segment.position = segments[segments.Count - 1].position;//Add the segment to the tail of the snake by getting the postion of the last segment in the list
 
         segments.Add(segment);
+        score += 1;
+        checkpoint = timer;
     }
 
     //Method for putting state of the game back to original state
     private void ResetGame()
     {
+        Debug.Log("GAME HAS BEEN RESETED");
+
+        // reset game variables
+        timer = 0;
+        score = 0;
+        checkpoint = 0;
+
         //Loop through Segment list completely destroy the segments
         for(int i=1; i<segments.Count; i++ ) {
             Destroy(segments[i].gameObject);
