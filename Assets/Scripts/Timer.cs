@@ -39,7 +39,7 @@ public class Timer : MonoBehaviour
         this.timer = time;
     }
 
-    public float getTime() {
+    public float GetTimer() {
         return this.timer;
     }
 

@@ -11,6 +11,7 @@ public class Snake : MonoBehaviour
     private Score scoreScript;
     private Timer timerScript;
     private Apple appleScript;
+    private bool initilizedGame = false; 
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +67,7 @@ public class Snake : MonoBehaviour
     private void Grow() 
     {
         scoreScript.IncreaseScore();
-        timerScript.setCheckpoint(timerScript.getTime());
+        timerScript.setCheckpoint(timerScript.GetTimer());
         Transform segment = Instantiate(this.segmentPrefab); //Instantiate a new segment using prefab from asset folder
         segment.position = segments[segments.Count - 1].position;//Add the segment to the tail of the snake by getting the postion of the last segment in the list
 
@@ -76,10 +77,17 @@ public class Snake : MonoBehaviour
     //Method for putting state of the game back to original state
     public void ResetGame()
     {
-        Debug.Log("GAME HAS BEEN RESETED");
+        if (!initilizedGame)
+        {
+            initilizedGame = true;
+        } else
+        {
+            Debug.Log("GAME HAS BEEN RESETED, You died after " + timerScript.GetTimer() + " seconds and the last score was: " + scoreScript.GetScore());
+        }
+        
 
         //Loop through Segment list completely destroy the segments
-        for(int i=1; i<segments.Count; i++ ) {
+        for (int i=1; i<segments.Count; i++ ) {
             Destroy(segments[i].gameObject);
         }
         segments.Clear(); //Clear the list of segments. (If no destroy, the segments would still exist but just not referenced)

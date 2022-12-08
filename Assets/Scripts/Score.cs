@@ -33,6 +33,11 @@ public class Score : MonoBehaviour
         score = this.score;
     }
 
+    public int GetScore()
+    {
+        return this.score;
+    }
+
     public void ResetScore()
     {
         this.score = 0;

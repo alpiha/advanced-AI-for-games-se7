@@ -1,0 +1,14 @@
+Find number of walls (random number) between 1 and 3. 
+Set safespace (SS) to value (2)
+Find starting point (SP) on the map. 
+    for each wall that should be placed 
+        find the length of each wall (random number) between 2 and 5
+        arrayOfPossibleDirections = []
+        for each direction (north, south, east, west)
+            check if the length of the wall + safespace (SP), don't hit another collider 
+            if it does not hit collider  
+                add that direction to arrayOfPossibleDirections
+        find a random direction from the arrayOfPossibleDirections
+        walk the direction until the length of wall is meet from the starting point. 
+        Set the SP on the last placed tile. 
+        
