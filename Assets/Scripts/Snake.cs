@@ -11,11 +11,13 @@ public class Snake : MonoBehaviour
     private Score scoreScript;
     private Timer timerScript;
     private Apple appleScript;
+    private Wall wallScript;
     private bool initilizedGame = false; 
 
     // Start is called before the first frame update
     void Start()
     {
+        wallScript = GameObject.Find("Invisible_wall").GetComponent<Wall>();
         scoreScript = GameObject.Find("ScoreText").GetComponent<Score>();
         timerScript = GameObject.Find("TimerText").GetComponent<Timer>();
         appleScript = GameObject.Find("Apple").GetComponent<Apple>();
@@ -100,6 +102,7 @@ public class Snake : MonoBehaviour
         this.transform.position = Vector3.zero; //reset position back to the middle. 
 
         // reset game attibutes
+        wallScript.RandomizeSpawn();
         appleScript.RandomizeSpawn();
         scoreScript.ResetScore();
         timerScript.ResetTimer();
