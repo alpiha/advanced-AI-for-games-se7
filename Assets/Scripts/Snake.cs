@@ -97,8 +97,8 @@ public class Snake : MonoBehaviour
             segments.Add(Instantiate(this.segmentPrefab));
         }
 
-        this.transform.position = Vector3.zero; //reset position back to the middle. 
-
+       // this.transform.localposition = Vector3.zero; //reset position back to the middle. 
+        this.transform.localPosition = new Vector3(0, 0, 0);
         // reset game attibutes
         appleScript.RandomizeSpawn();
         scoreScript.ResetScore();
