@@ -52,13 +52,13 @@ public class Snake : MonoBehaviour
     {
         //Loop through list of segments IN REVERSE order.
         for(int i = segments.Count -1; i > 0; i--) {
-            segments[i].position = segments[i-1].position; //Starting from the tail, the segments position is set to the position of the segment ahead of it.
+            segments[i].localPosition = segments[i-1].position; //Starting from the tail, the segments position is set to the position of the segment ahead of it.
         }
         
         //Lastly, update the positon of the head of the snake. Postion is rounded to move in grid-like manner
-        this.transform.position = new Vector3(
-            Mathf.Round(this.transform.position.x) + direction.x,
-            Mathf.Round(this.transform.position.y) + direction.y,
+        this.transform.localPosition = new Vector3(
+            Mathf.Round(this.transform.localPosition.x) + direction.x,
+            Mathf.Round(this.transform.localPosition.y) + direction.y,
             0.0f //This is 0 bc Snake is a 2D game and the Z axis is not needed
         );
     }
@@ -69,7 +69,7 @@ public class Snake : MonoBehaviour
         scoreScript.IncreaseScore();
         timerScript.setCheckpoint(timerScript.GetTimer());
         Transform segment = Instantiate(this.segmentPrefab); //Instantiate a new segment using prefab from asset folder
-        segment.position = segments[segments.Count - 1].position;//Add the segment to the tail of the snake by getting the postion of the last segment in the list
+        segment.localPosition = segments[segments.Count - 1].localPosition;//Add the segment to the tail of the snake by getting the postion of the last segment in the list
 
         segments.Add(segment);
     }
@@ -97,7 +97,7 @@ public class Snake : MonoBehaviour
             segments.Add(Instantiate(this.segmentPrefab));
         }
 
-       // this.transform.localposition = Vector3.zero; //reset position back to the middle. 
+       // this.transform.position = Vector3.zero; //reset position back to the middle. 
         this.transform.localPosition = new Vector3(0, 0, 0);
         // reset game attibutes
         appleScript.RandomizeSpawn();
@@ -115,6 +115,7 @@ public class Snake : MonoBehaviour
                 Grow();
                 break;
             case "Obstacle":
+                Debug.Log("You died to: " + otherObject);
                 ResetGame();
                 break;
         }

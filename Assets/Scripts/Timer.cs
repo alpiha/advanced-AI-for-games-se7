@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour
 {
     
     [Tooltip("maximum time between apple pickups")]
-    public float deadtime = 60;
+    public float deadtime = 10;
     private float checkpoint = 0;
     private float timer = 0;
     private TextMeshProUGUI timerText;
@@ -28,6 +28,7 @@ public class Timer : MonoBehaviour
         if (timer - checkpoint >= deadtime)
         {
             Debug.Log("The Snake have not found an apple within the last: " + deadtime + " seconds");
+            ResetTimer();
             snakeScript.ResetGame();
         }
 
