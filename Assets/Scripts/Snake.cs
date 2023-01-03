@@ -8,16 +8,17 @@ public class Snake : MonoBehaviour
     private List<Transform> segments = new List<Transform>(); //List attribte for counting length of snake
     public Transform segmentPrefab;
     public int initialSize = 3;
-    private Score scoreScript;
-    private Timer timerScript;
+    public Timer timerScript;
+    public Score scoreScript;
     private Apple appleScript;
+    public SpriteRenderer background;
     private bool initilizedGame = false; 
 
     // Start is called before the first frame update
     void Start()
     {
-        scoreScript = GameObject.Find("ScoreText").GetComponent<Score>();
-        timerScript = GameObject.Find("TimerText").GetComponent<Timer>();
+       // scoreScript = GameObject.Find("ScoreText").GetComponent<Score>();
+        //timerScript = GameObject.Find("TimerText").GetComponent<Timer>();
         appleScript = GameObject.Find("Apple").GetComponent<Apple>();
         //Look at the ResetGame method for more info
         ResetGame();
@@ -84,8 +85,7 @@ public class Snake : MonoBehaviour
         {
             Debug.Log("GAME HAS BEEN RESETED, You died after " + timerScript.GetTimer() + " seconds and the last score was: " + scoreScript.GetScore());
         }
-        
-
+        Time.timeScale = 1;
         //Loop through Segment list completely destroy the segments
         for (int i=1; i<segments.Count; i++ ) {
             Destroy(segments[i].gameObject);
@@ -100,6 +100,7 @@ public class Snake : MonoBehaviour
        // this.transform.position = Vector3.zero; //reset position back to the middle. 
         this.transform.localPosition = new Vector3(0, 0, 0);
         // reset game attibutes
+        
         appleScript.RandomizeSpawn();
         scoreScript.ResetScore();
         timerScript.ResetTimer();
@@ -113,13 +114,31 @@ public class Snake : MonoBehaviour
         switch(otherObject.tag) {
             case "Apple":
                 Grow();
+                StartCoroutine(ChangeBackgroundGreen());
                 break;
             case "Obstacle":
-                Debug.Log("You died to: " + otherObject);
+                Debug.Log(gameObject + " died to: " + otherObject);
                 ResetGame();
+                StartCoroutine(ChangeBackgroundRed());
                 break;
         }
-    
-    }
 
+        IEnumerator ChangeBackgroundRed()
+        {
+            background.color = new Color(1, 0, 0, 0.5f);
+            //yield on a new YieldInstruction that waits for 5 seconds.
+            yield return new WaitForSeconds(0.125f);
+            background.color = new Color(0, 0, 0, 1);
+        }
+
+        IEnumerator ChangeBackgroundGreen()
+        {
+            background.color = new Color(0, 1, 0, 0.5f);
+            //yield on a new YieldInstruction that waits for 5 seconds.
+            yield return new WaitForSeconds(0.125f);
+            background.color = new Color(0, 0, 0, 1);
+        }
+
+
+    }
 }

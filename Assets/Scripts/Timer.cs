@@ -7,29 +7,32 @@ public class Timer : MonoBehaviour
 {
     
     [Tooltip("maximum time between apple pickups")]
-    public float deadtime = 10;
+    public float deadtime = 60;
     private float checkpoint = 0;
     private float timer = 0;
-    private TextMeshProUGUI timerText;
-    private Snake snakeScript;
+    private TextMesh timerText;
+    [Tooltip("Insert the Snake Prefab")]
+    public Snake snake;
+    //private Snake snakeScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        timerText = gameObject.GetComponent<TextMeshProUGUI>();
-        snakeScript = GameObject.Find("Snake").GetComponent<Snake>();
+       
+        timerText = gameObject.GetComponent<TextMesh>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //this.transform.localPosition = this.transform.localPosition + new Vector3(5f, 3f, 0f);
         timer += Time.deltaTime;
         timerText.text = "Time: " + timer;
         if (timer - checkpoint >= deadtime)
         {
             Debug.Log("The Snake have not found an apple within the last: " + deadtime + " seconds");
-            ResetTimer();
-            snakeScript.ResetGame();
+            //snakeScript.ResetGame();
+            snake.ResetGame();
         }
 
     }
