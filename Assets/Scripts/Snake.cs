@@ -11,8 +11,9 @@ public class Snake : MonoBehaviour
     public Timer timerScript;
     public Score scoreScript;
     public Apple apple;
-    public InnerWall wall;
+    public InnerWall innerWalls;
     public SpriteRenderer background;
+    public int minimumSegmentAmount = 5;
     private bool initilizedGame = false; 
 
     // Start is called before the first frame update
@@ -91,6 +92,8 @@ public class Snake : MonoBehaviour
         for (int i=1; i<segments.Count; i++ ) {
             Destroy(segments[i].gameObject);
         }
+        innerWalls.DespawnWalls();
+
         segments.Clear(); //Clear the list of segments. (If no destroy, the segments would still exist but just not referenced)
         
         segments.Add(this.transform);//add back the head of the snake.
@@ -102,13 +105,23 @@ public class Snake : MonoBehaviour
         this.transform.localPosition = new Vector3(0, 0, 0);
         // reset game attibutes
 
-        //wall.RandomizeSpawn();
+
+        innerWalls.SpawnWalls();
         apple.RandomizeSpawn();
         scoreScript.ResetScore();
         timerScript.ResetTimer();
+        EnsureWallAmountOfWallSegments();
     }
-    
-    
+
+    private void EnsureWallAmountOfWallSegments()
+    {
+        if (innerWalls.GetWallAmount() <= minimumSegmentAmount)
+        {
+            ResetGame();
+        }
+    }
+
+
     //Method that triggers open collision with another object
     private void OnTriggerEnter2D(Collider2D otherObject) 
     {

@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &284081427 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7148577436669066824, guid: ea5558b19180c154eb85631b653c0c69, type: 3}
+  m_PrefabInstance: {fileID: 370444363}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f4844372143ff408a87895c4147eda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &370444363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Environment
       objectReference: {fileID: 0}
+    - target: {fileID: 4909223370211978491, guid: ea5558b19180c154eb85631b653c0c69, type: 3}
+      propertyPath: innerWalls
+      value: 
+      objectReference: {fileID: 284081427}
     - target: {fileID: 4909223370712667518, guid: ea5558b19180c154eb85631b653c0c69, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 40
@@ -141,6 +156,22 @@ PrefabInstance:
     - target: {fileID: 4909223370712667518, guid: ea5558b19180c154eb85631b653c0c69, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148577436669066824, guid: ea5558b19180c154eb85631b653c0c69, type: 3}
+      propertyPath: saveSpace
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148577436669066824, guid: ea5558b19180c154eb85631b653c0c69, type: 3}
+      propertyPath: wallLength
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148577436669066824, guid: ea5558b19180c154eb85631b653c0c69, type: 3}
+      propertyPath: wallsOnMap
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148577436669066824, guid: ea5558b19180c154eb85631b653c0c69, type: 3}
+      propertyPath: numberOfWalls
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8925890492009086198, guid: ea5558b19180c154eb85631b653c0c69, type: 3}
       propertyPath: m_RootOrder
