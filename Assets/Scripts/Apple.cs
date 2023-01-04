@@ -34,7 +34,7 @@ public class Apple : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D otherObject) 
     {
         //check to see if the colliding object is the "player" i.e. the snake.
-        if (otherObject.tag == "Player") {
+        if (otherObject.tag == "Player" || otherObject.tag == "Obstacle") {
             RandomizeSpawn();
         }
     

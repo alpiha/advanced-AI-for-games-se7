@@ -10,7 +10,8 @@ public class Snake : MonoBehaviour
     public int initialSize = 3;
     public Timer timerScript;
     public Score scoreScript;
-    private Apple appleScript;
+    public Apple apple;
+    public InnerWall wall;
     public SpriteRenderer background;
     private bool initilizedGame = false; 
 
@@ -19,7 +20,7 @@ public class Snake : MonoBehaviour
     {
        // scoreScript = GameObject.Find("ScoreText").GetComponent<Score>();
         //timerScript = GameObject.Find("TimerText").GetComponent<Timer>();
-        appleScript = GameObject.Find("Apple").GetComponent<Apple>();
+        //appleScript = GameObject.Find("Apple").GetComponent<Apple>();
         //Look at the ResetGame method for more info
         ResetGame();
 
@@ -83,7 +84,7 @@ public class Snake : MonoBehaviour
             initilizedGame = true;
         } else
         {
-            Debug.Log("GAME HAS BEEN RESETED, You died after " + timerScript.GetTimer() + " seconds and the last score was: " + scoreScript.GetScore());
+            //Debug.Log("GAME HAS BEEN RESETED, You died after " + timerScript.GetTimer() + " seconds and the last score was: " + scoreScript.GetScore());
         }
         Time.timeScale = 1;
         //Loop through Segment list completely destroy the segments
@@ -100,8 +101,9 @@ public class Snake : MonoBehaviour
        // this.transform.position = Vector3.zero; //reset position back to the middle. 
         this.transform.localPosition = new Vector3(0, 0, 0);
         // reset game attibutes
-        
-        appleScript.RandomizeSpawn();
+
+        //wall.RandomizeSpawn();
+        apple.RandomizeSpawn();
         scoreScript.ResetScore();
         timerScript.ResetTimer();
     }
@@ -117,7 +119,7 @@ public class Snake : MonoBehaviour
                 StartCoroutine(ChangeBackgroundGreen());
                 break;
             case "Obstacle":
-                Debug.Log(gameObject + " died to: " + otherObject);
+                //Debug.Log(gameObject + " died to: " + otherObject);
                 ResetGame();
                 StartCoroutine(ChangeBackgroundRed());
                 break;
