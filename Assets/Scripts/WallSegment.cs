@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WallSegment : MonoBehaviour
 {
+    private Apple apple;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +19,13 @@ public class WallSegment : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D otherObject)
     {
         //check to see if the colliding object is the "player" i.e. the snake.
-        if (otherObject.tag == "Player" || otherObject.tag == "Apple" || otherObject.tag == "Obstacle")
+        if (otherObject.tag == "Obstacle")
         {
-            Destroy(this);
+            Destroy(this.gameObject);
+        }
+        else if (otherObject.tag == "Apple")
+        {
+            apple.RandomizeSpawn();
         }
     }
 

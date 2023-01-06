@@ -23,4 +23,6 @@ public class WallCounter : MonoBehaviour
             wallCounterText.text = "WallCounter: " + innerWall.GetWallAmount();
         }
     }
+
+   
 }
