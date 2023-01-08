@@ -6,6 +6,9 @@
         "m_EditorClassIdentifier": "Unity.Scripting.Python.Editor:UnityEditor.Scripting.Python:PythonSettings",
         "m_pythonInterpreter": "C:/Python27/python.exe",
         "m_pythonTimeoutMs": 1000,
-        "m_sitePackages": []
+        "m_sitePackages": [
+            "ProjectSettings/requirements.txt",
+            "Assets/site-packages/gym/__init__.py"
+        ]
     }
 }

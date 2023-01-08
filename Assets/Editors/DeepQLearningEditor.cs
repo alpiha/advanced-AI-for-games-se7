@@ -18,7 +18,7 @@ public class DeepQLearningEditor : Editor
     {
         if (GUILayout.Button("Start DeepQLearning", GUILayout.Height(35)))
         {
-            string path = Application.dataPath + "/python/log_names.py";
+            string path = Application.dataPath + "/python/main.py";
             PythonRunner.RunFile(path);
         }
     }
