@@ -108,7 +108,6 @@ public class Snake : MonoBehaviour
         this.transform.localPosition = new Vector3(0, 0, 0);
         // reset game attibutes
 
-
         innerWalls.CreateWalls();
         apple.RandomizeSpawn();
         scoreScript.ResetScore();
