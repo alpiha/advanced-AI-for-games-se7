@@ -8,7 +8,7 @@
         "m_pythonTimeoutMs": 1000,
         "m_sitePackages": [
             "ProjectSettings/requirements.txt",
-            "Assets/site-packages/gym/__init__.py"
+            "Assets/site-packages/gym/"
         ]
     }
 }
