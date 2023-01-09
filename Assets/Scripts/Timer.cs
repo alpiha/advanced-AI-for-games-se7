@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+     
         timerText = gameObject.GetComponent<TextMesh>();
     }
 
@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
         timerText.text = "Time: " + timer;
         if (timer - checkpoint >= deadtime)
         {
-            Debug.Log("The Snake have not found an apple within the last: " + deadtime + " seconds");
+           // Debug.Log("The Snake have not found an apple within the last: " + deadtime + " seconds");
             //snakeScript.ResetGame();
             snake.ResetGame();
         }

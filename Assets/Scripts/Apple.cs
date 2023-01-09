@@ -23,6 +23,10 @@ public class Apple : MonoBehaviour
     public void RandomizeSpawn(){
         Bounds bounds = this.mapArea.bounds; //This is where the attribute is set. this.mapArea refers to an object you specified in unity
 
+        Debug.Log("Bounds is x max : " + this.mapArea.bounds.max.x);
+        Debug.Log("Bounds is: " + this.mapArea.bounds.min.x);
+        Debug.Log("Bounds is y max : " + this.mapArea.bounds.max.y);
+        Debug.Log("Bounds is: " + this.mapArea.bounds.min.y);
         //Random x and y coordinates for the apple within the bounds
         float x = Random.Range(bounds.min.x, bounds.max.x);
         float y = Random.Range(bounds.min.y, bounds.max.y);
@@ -34,7 +38,7 @@ public class Apple : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D otherObject) 
     {
         //check to see if the colliding object is the "player" i.e. the snake.
-        if (otherObject.tag == "Player") {
+        if (otherObject.tag == "Player" || otherObject.tag == "Obstacle") {
             RandomizeSpawn();
         }
     

@@ -11,7 +11,9 @@ public class Snake : MonoBehaviour
     public Timer timerScript;
     public Score scoreScript;
     public Apple apple;
+    public InnerWall innerWalls;
     public SpriteRenderer background;
+    //public int minimumSegmentAmount = 5;
     private bool initilizedGame = false; 
 
     // Start is called before the first frame update
@@ -81,32 +83,39 @@ public class Snake : MonoBehaviour
         if (!initilizedGame)
         {
             initilizedGame = true;
-        } else
+        }
+        else
         {
-            Debug.Log("GAME HAS BEEN RESETED, You died after " + timerScript.GetTimer() + " seconds and the last score was: " + scoreScript.GetScore());
+            //Debug.Log("GAME HAS BEEN RESETED, You died after " + timerScript.GetTimer() + " seconds and the last score was: " + scoreScript.GetScore());
         }
         Time.timeScale = 1;
         //Loop through Segment list completely destroy the segments
-        for (int i=1; i<segments.Count; i++ ) {
+        for (int i = 1; i < segments.Count; i++)
+        {
             Destroy(segments[i].gameObject);
         }
+        innerWalls.DespawnWalls();
+
         segments.Clear(); //Clear the list of segments. (If no destroy, the segments would still exist but just not referenced)
-        
+
         segments.Add(this.transform);//add back the head of the snake.
-        for(int i = 1; i<initialSize; i++) { //add segments until equal to initial size value.
+        for (int i = 1; i < initialSize; i++)
+        { //add segments until equal to initial size value.
             segments.Add(Instantiate(this.segmentPrefab));
         }
 
-       // this.transform.position = Vector3.zero; //reset position back to the middle. 
+        // this.transform.position = Vector3.zero; //reset position back to the middle. 
         this.transform.localPosition = new Vector3(0, 0, 0);
         // reset game attibutes
-        
+
+        innerWalls.CreateWalls();
         apple.RandomizeSpawn();
         scoreScript.ResetScore();
         timerScript.ResetTimer();
     }
-    
-    
+
+  
+
     //Method that triggers open collision with another object
     private void OnTriggerEnter2D(Collider2D otherObject) 
     {
@@ -117,7 +126,7 @@ public class Snake : MonoBehaviour
                 StartCoroutine(ChangeBackgroundGreen());
                 break;
             case "Obstacle":
-                Debug.Log(gameObject + " died to: " + otherObject);
+                //Debug.Log(gameObject + " died to: " + otherObject);
                 ResetGame();
                 StartCoroutine(ChangeBackgroundRed());
                 break;
